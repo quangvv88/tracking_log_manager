@@ -1,7 +1,7 @@
-package vn.com.galaxy.trackinglogmanager.trackingmanager
+package vn.com.galaxy.log.data.data.local
 
 import androidx.room.*
-import vn.com.galaxy.trackinglogmanager.model.TrackingLogModel
+import vn.com.galaxy.log.data.model.TrackingLogModel
 
 @Dao
 interface TrackingLogDao {

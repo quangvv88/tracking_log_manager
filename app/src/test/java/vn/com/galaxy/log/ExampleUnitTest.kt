@@ -1,4 +1,4 @@
-package vn.com.galaxy.trackinglogmanager
+package vn.com.galaxy.log
 
 import org.junit.Test
 

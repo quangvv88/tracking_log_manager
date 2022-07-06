@@ -1,4 +1,4 @@
-package vn.com.galaxy.trackinglogmanager
+package vn.com.galaxy.log
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
