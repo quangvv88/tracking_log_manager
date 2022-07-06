@@ -14,9 +14,9 @@ import java.util.*
 import javax.inject.Inject
 
 class TrackingLogManagerImpl @Inject constructor(
-    val context: Context,
-    val repository: TrackingLogApiRepository,
-    val host: String
+    private val context: Context,
+    private val repository: TrackingLogApiRepository,
+    private val host: String
 ) : TrackingLogManager {
 
     private var currentSessionID = -1L
@@ -182,32 +182,42 @@ class TrackingLogManagerImpl @Inject constructor(
             logEventFirebase.invoke(evenCode, bundle)
             val hashMap = HashMap<String, Any>()
             when (evenCode) {
-                EVENT_CODE_ONBOARDING_COMPLETE -> if (jsonObject.has("user_id")) {
-                    val userID = jsonObject.getString("user_id")
+                EVENT_CODE_ONBOARDING_COMPLETE -> if (jsonObject.has(PARAM_USER_ID)) {
+                    val userID = jsonObject.getString(PARAM_USER_ID)
                     hashMap[PARAM_CUSTOMER_USER_ID] = userID
                     trackEvent.invoke(userID, evenCode, EVENT_CODE_COMPLETE_REGISTRATION, hashMap)
                 }
-                EVENT_CODE_ONBOARDING_LOGIN -> if (jsonObject.has("Value")) {
-                    val value = jsonObject.getString("Value")
-                    val userID = jsonObject.getString("user_id")
+                EVENT_CODE_ONBOARDING_LOGIN -> if (jsonObject.has(PARAM_VALUE)) {
+                    val value = jsonObject.getString(PARAM_VALUE)
+                    val userID = jsonObject.getString(PARAM_USER_ID)
                     hashMap[PARAM_CUSTOMER_USER_ID] = userID
                     hashMap[PARAM_CONTENT_TYPE] = value
                     trackEvent.invoke(userID, evenCode, EVENT_CODE_LOGIN, hashMap)
                 }
-                EVENT_CODE_AF_OPEN_APP -> if (jsonObject.has("user_id")) {
-                    val userID = jsonObject.getString("user_id")
+                EVENT_CODE_AF_OPEN_APP -> if (jsonObject.has(PARAM_USER_ID)) {
+                    val userID = jsonObject.getString(PARAM_USER_ID)
                     hashMap[PARAM_CUSTOMER_USER_ID] = userID
                     trackEvent.invoke(userID, evenCode, EVENT_CODE_AF_OPEN_APP, hashMap)
                 }
-                EVENT_CODE_AF_PLAY_APP -> if (jsonObject.has("user_id")) {
-                    val userID = jsonObject.getString("user_id")
+                EVENT_CODE_AF_PLAY_APP -> if (jsonObject.has(PARAM_USER_ID)) {
+                    val userID = jsonObject.getString(PARAM_USER_ID)
                     hashMap[PARAM_CUSTOMER_USER_ID] = userID
                     trackEvent.invoke(userID, evenCode, EVENT_CODE_AF_PLAY_APP, hashMap)
                 }
-                EVENT_CODE_AF_USER_PROFILE -> if (jsonObject.has("user_id")) {
-                    val userID = jsonObject.getString("user_id")
+                EVENT_CODE_AF_USER_PROFILE -> if (jsonObject.has(PARAM_USER_ID)) {
+                    val userID = jsonObject.getString(PARAM_USER_ID)
                     hashMap[PARAM_CUSTOMER_USER_ID] = userID
                     trackEvent.invoke(userID, evenCode, EVENT_CODE_AF_USER_PROFILE, hashMap)
+                }
+                EVENT_CODE_CLICK_PAYMENT -> if (jsonObject.has(PARAM_VALUE)) {
+                    val value = jsonObject.getString(PARAM_VALUE)
+                    hashMap[PARAM_AF_DESCRIPTION] = value
+                    trackEvent.invoke(value, evenCode, EVENT_CODE_CLICK_PAYMENT, hashMap)
+                }
+                EVENT_CODE_RESULT_PAYMENT -> if (jsonObject.has(PARAM_VALUE)) {
+                    val value = jsonObject.getString(PARAM_VALUE)
+                    hashMap[PARAM_AF_PRICE] = value
+                    trackEvent.invoke(value, evenCode, EVENT_CODE_RESULT_PAYMENT, hashMap)
                 }
             }
             Timber.tag(TRACKING_LOG_TAG).i("Log event to Firebase and AppsFlyer end")

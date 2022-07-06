@@ -9,12 +9,15 @@ const val MAX_NUM_COUNT = 5
 const val CATEGORY_APP = "app"
 const val CATEGORY_ENTERTAINMENT = "entertainment"
 const val CATEGORY_PARENT_CONTROL = "parentcontrol"
+const val CATEGORY_APPFLYER = "af"
 const val CATEGORY_INPUT = "input"
 const val CATEGORY_PAYMENT = "payment"
 const val CATEGORY_LEARN_MORE = "learnmore"
 const val CATEGORY_POP_UP = "pop_up"
 
 /** Code */
+const val CODE_11005 = "11005"
+const val CODE_11006 = "11006"
 const val CODE_10401 = "10401"
 const val CODE_50000 = "50000"
 const val CODE_50001 = "50001"
@@ -175,6 +178,7 @@ const val EVENT_BUTTON_UPGRADE = "buttonUpgrade"
 const val EVENT_FINISH_EMAIL = "finishEmail"
 const val EVENT_CLOSE_LIST_SUB = "closeListSub"
 const val EVENT_ERROR = "error"
+const val EVENT_POPUP_PAYMENT = "popupPayment"
 
 /** Value */
 const val VALUE_0 = "0"
@@ -223,8 +227,12 @@ const val EVENT_CODE_AF_OPEN_APP = "af_open_app"
 const val EVENT_CODE_AF_PLAY_APP = "af_info_playApp"
 const val EVENT_CODE_AF_USER_PROFILE = "af_info_userProfile"
 const val EVENT_CODE_COMPLETE_REGISTRATION = "af_complete_registration"
+const val EVENT_CODE_CLICK_PAYMENT = "af_click_popupPayment"
+const val EVENT_CODE_RESULT_PAYMENT = "af_info_resultPayment"
 const val EVENT_CODE_LOGIN = "af_login"
 const val PARAM_CUSTOMER_USER_ID = "af_customer_user_id"
 const val PARAM_CONTENT_TYPE = "af_content_type"
+const val PARAM_AF_DESCRIPTION = "af_description"
+const val PARAM_AF_PRICE = "af_price"
 
 
